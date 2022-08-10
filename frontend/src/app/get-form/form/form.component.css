@@ -1,0 +1,21 @@
+.form-container {
+    padding: 5%;
+    width: 50%;
+    margin: auto;
+}
+
+.card-container {
+    margin: 5%;
+}
+
+.form-container div {
+    margin: 10px;
+}
+
+.form-container button {
+    margin-top: 25px;
+}
+
+.buttons-container button {
+    margin-right: 10px;
+}

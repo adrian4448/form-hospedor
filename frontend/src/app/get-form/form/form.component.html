@@ -1,1 +1,29 @@
-<p>form works!</p>
+<div class="form-container">
+    <p-steps [model]="items" [activeIndex]="activeItem"></p-steps>
+
+    <p-card class="card-container form-container" *ngIf="activeItem === 0">
+        <form>
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                <input type="text" pInputText placeholder="Nome da página">         
+            </div>
+
+            <div class="buttons-container">
+                <button pButton type="button" label="Proxima etapa" (click)="nextStep()"></button>
+            </div>
+        </form>
+    </p-card>
+
+    <p-card class="card-container uploader-container" *ngIf="activeItem === 1">
+        <!-- (uploadHandler)="myUploader($event)" -->
+        <p-fileUpload name="myfile[]" [multiple]="false" (onUpload)="nextStep()" (onError)="nextStep()"></p-fileUpload>
+
+        <div class="buttons-container">
+            <button pButton type="button" label="Voltar" (click)="previousStep()"></button>
+        </div>
+    </p-card>
+
+    <p-card class="card-container uploader-container" *ngIf="activeItem === 2">
+        <h1>Parabéns, foi realizado o upload</h1>
+    </p-card>
+</div>
