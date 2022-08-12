@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AwsAccountService } from './services/aws-account.service';
 
 @Component({
   selector: 'app-aws-sign',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AwsSignComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private awsAccountInfoService: AwsAccountService
+  ) { }
 
   ngOnInit(): void {
   }

@@ -15,18 +15,18 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.items = [
         {
-            label: 'Hospedar Site',
-            icon: 'pi pi-fw pi-code',
-            url: '/form'
+          label: 'Hospedar Site',
+          icon: 'pi pi-fw pi-code',
+          url: '/form'
         },
         { 
           label: 'Sites hospedados',
           icon: 'pi pi-server',
         },
         {
-            label: 'Informações AWS',
-            icon: 'pi pi-fw pi-amazon',
-            url: '/aws'
+          label: 'Informações AWS',
+          icon: 'pi pi-fw pi-amazon',
+          url: '/aws'
         },
         {
           label: 'Perfil',
