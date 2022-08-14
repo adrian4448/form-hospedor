@@ -1,0 +1,22 @@
+.login-container {
+    width: 50%;
+}
+
+.image-login {
+    width: 100%;
+}
+
+.p-card {
+    height: 100%;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.p-inputgroup {
+    margin: 10px;
+    width: 90%;
+}

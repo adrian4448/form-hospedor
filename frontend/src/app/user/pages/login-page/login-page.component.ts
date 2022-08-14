@@ -12,4 +12,8 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  login() {
+    localStorage.setItem('userLogged', 'true');
+  }
+
 }

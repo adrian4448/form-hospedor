@@ -1,31 +1,60 @@
 package com.formhospedor.backend.api.controller;
 
-import com.formhospedor.backend.api.dto.AppUserDTO;
+import com.formhospedor.backend.api.dto.AuthenticationDTO;
+import com.formhospedor.backend.api.dto.NewAppUserDTO;
+import com.formhospedor.backend.api.dto.TokenDTO;
+import com.formhospedor.backend.config.security.jwt.JwtService;
+import com.formhospedor.backend.exceptions.BusinessException;
 import com.formhospedor.backend.model.AppUser;
 import com.formhospedor.backend.service.UserService;
+import com.formhospedor.backend.service.impl.UserDetailsServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
-    private ModelMapper mapper;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private ModelMapper mapper;
+
     @PostMapping
-    public AppUserDTO createNewUser(@RequestBody AppUserDTO dto) {
+    private NewAppUserDTO createNewUser(@RequestBody NewAppUserDTO dto) {
         var user = mapper.map(dto, AppUser.class);
 
         return userService.createNewUser(user)
-                .map(userCreated -> mapper.map(userCreated, AppUserDTO.class))
-                .get();
+                .map(userCreated -> mapper.map(userCreated, NewAppUserDTO.class))
+                .orElseThrow(() -> new BusinessException("Não foi possivel criar o usuário, verifique as informações"));
     }
+
+    @PostMapping("/auth")
+    private TokenDTO getToken(@RequestBody AuthenticationDTO dto) {
+        try {
+            var user = mapper.map(dto, AppUser.class);
+
+            UserDetails userAuthenticated = userDetailsService.authenticate(user);
+
+            String token = jwtService.generateToken(user);
+            return new TokenDTO(token, userAuthenticated.getUsername());
+        } catch(Exception e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
+    }
+
 }

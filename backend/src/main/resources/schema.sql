@@ -15,5 +15,3 @@ CREATE TABLE IF NOT EXISTS aws_account_info (
 );
 
 ALTER TABLE aws_account_info ADD CONSTRAINT IF NOT EXISTS fk_user_aws FOREIGN KEY (user_id) REFERENCES app_user (id);
-
-INSERT INTO app_user VALUES (1, 'teste', 'teste', 'teste');

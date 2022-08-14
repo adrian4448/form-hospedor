@@ -12,6 +12,8 @@ export class MenuComponent implements OnInit {
 
   public items: MenuItem[] = [];
 
+  public userLogged = localStorage.getItem('userLogged');
+
   ngOnInit() {
     this.items = [
         {

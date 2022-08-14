@@ -1,1 +1,22 @@
-<p>login-page works!</p>
+<div class="flex">
+    <div class="login-container">
+        <img class="image-login" src="./../../../../assets/login-theme.jpg">
+    </div>
+    <div class="login-container center">
+        <form>
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                <input type="text" pInputText placeholder="Usuário">         
+            </div>
+
+            <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                <input type="text" pInputText placeholder="Senha">         
+            </div>
+
+            <div style="margin: 10px;">
+                <button pButton type="button" label="Entrar" (click)="login()"></button>
+            </div>
+        </form>
+    </div>
+</div>
