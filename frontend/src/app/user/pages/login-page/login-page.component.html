@@ -3,19 +3,20 @@
         <img class="image-login" src="./../../../../assets/login-theme.jpg">
     </div>
     <div class="login-container center">
-        <form>
+        <form [formGroup]="userForm">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                <input type="text" pInputText placeholder="Usuário">         
+                <input type="text" pInputText placeholder="Usuário" formControlName="userName">         
             </div>
 
             <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                <input type="text" pInputText placeholder="Senha">         
+                <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+                <input type="password" pInputText placeholder="Senha" formControlName="password">         
             </div>
 
-            <div style="margin: 10px;">
+            <div class="buttons-container">
                 <button pButton type="button" label="Entrar" (click)="login()"></button>
+                <h5>Cadastre-se</h5>
             </div>
         </form>
     </div>

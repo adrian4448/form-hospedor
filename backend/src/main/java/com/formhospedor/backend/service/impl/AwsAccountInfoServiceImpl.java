@@ -7,6 +7,7 @@ import com.formhospedor.backend.service.AwsAccountInfoService;
 import com.formhospedor.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -20,6 +21,7 @@ public class AwsAccountInfoServiceImpl implements AwsAccountInfoService {
     private UserService userService;
 
     @Override
+    @Transactional
     public Optional<AwsAccountInfo> createAwsAccountInformation(AwsAccountInfo awsAccountInfo) {
         userService.findUserById(awsAccountInfo.getUser().getId())
                 .orElseThrow(() -> new NotFoundException("Não foi encontrado nenhum usuário com este ID"));

@@ -20,3 +20,15 @@
     margin: 10px;
     width: 90%;
 }
+
+.buttons-container {
+    display: flex;
+    width: 90%;
+    margin: 10px;
+    justify-content: space-between;
+}
+
+.buttons-container h5 {
+    color: rgb(88, 188, 255);
+    cursor: pointer;
+}

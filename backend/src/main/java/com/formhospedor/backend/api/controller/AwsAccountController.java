@@ -6,6 +6,7 @@ import com.formhospedor.backend.model.AwsAccountInfo;
 import com.formhospedor.backend.service.AwsAccountInfoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,6 +20,7 @@ public class AwsAccountController {
     private ModelMapper modelMapper;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public AwsAccountInfoDTO addAwsAccountInformation(@RequestBody NewAwsAccountDTO dto) {
         var awsAccountInfo = modelMapper.map(dto, AwsAccountInfo.class);
 

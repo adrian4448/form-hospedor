@@ -1,5 +1,6 @@
 package com.formhospedor.backend.api.controller;
 
+import com.formhospedor.backend.api.dto.AppUserDTO;
 import com.formhospedor.backend.api.dto.AuthenticationDTO;
 import com.formhospedor.backend.api.dto.NewAppUserDTO;
 import com.formhospedor.backend.api.dto.TokenDTO;
@@ -10,13 +11,16 @@ import com.formhospedor.backend.service.UserService;
 import com.formhospedor.backend.service.impl.UserDetailsServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/user")
@@ -35,6 +39,7 @@ public class UserController {
     private ModelMapper mapper;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     private NewAppUserDTO createNewUser(@RequestBody NewAppUserDTO dto) {
         var user = mapper.map(dto, AppUser.class);
 
@@ -44,6 +49,7 @@ public class UserController {
     }
 
     @PostMapping("/auth")
+    @ResponseStatus(HttpStatus.OK)
     private TokenDTO getToken(@RequestBody AuthenticationDTO dto) {
         try {
             var user = mapper.map(dto, AppUser.class);
@@ -55,6 +61,28 @@ public class UserController {
         } catch(Exception e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Page<AppUserDTO> findUsersByParams(@RequestParam PageRequest page, AppUserDTO params) {
+        var userParams = mapper.map(params, AppUser.class);
+        var result = userService.findUserByParams(page, userParams);
+
+        List<AppUserDTO> content = result
+                .stream()
+                .map(user -> mapper.map(user, AppUserDTO.class))
+                .collect(Collectors.toList());
+
+        return new PageImpl(content, PageRequest.of(page.getPageNumber(), page.getPageSize()), result.getTotalElements());
+    }
+
+    @GetMapping("/:id")
+    @ResponseStatus(HttpStatus.OK)
+    public AppUserDTO findUserById(@RequestParam("id") Integer id) {
+        return userService.findUserById(id)
+                .map(user -> mapper.map(user, AppUserDTO.class))
+                .get();
     }
 
 }

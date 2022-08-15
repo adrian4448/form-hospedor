@@ -8,6 +8,9 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './services/login.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { InputTextModule } from 'primeng/inputtext';
     CommonModule,
     CardModule,
     ButtonModule,
-    InputTextModule
-  ]
+    InputTextModule,
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
+  providers: [LoginService]
 })
 export class UserModule { }

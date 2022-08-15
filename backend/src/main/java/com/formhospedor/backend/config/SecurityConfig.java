@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.POST,"/api/user/auth").permitAll()
                     .anyRequest().authenticated()
                 .and()
-                    .csrf().disable()
+                    .csrf().disable().cors().and()
                     .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
