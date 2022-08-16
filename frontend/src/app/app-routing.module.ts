@@ -5,9 +5,10 @@ import { FormPageComponent } from './get-form/pages/form-page/form-page.componen
 import { LoginPageComponent } from './user/pages/login-page/login-page.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginPageComponent },
   { path: 'form', component: FormPageComponent },
   { path: 'aws', component: AwsPageComponent },
-  { path: 'login', component: LoginPageComponent },
 ];
 
 @NgModule({

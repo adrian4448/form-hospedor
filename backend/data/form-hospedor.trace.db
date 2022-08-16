@@ -7957,3 +7957,6 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295)
 	at com.formhospedor.backend.BackendApplication.main(BackendApplication.java:10)
+2022-08-15 20:45:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS site_info   [*]id INT AUTO_INCREMENT PRIMARY KEY, siteName VARCHAR(255), url VARCHAR(255), aws_account_info_id INT   ALTER TABLE aws_account_info ADD CONSTRAINT IF NOT EXISTS fk_user_aws FOREIGN KEY (user_id) REFERENCES app_user (id)"; SQL statement:
+CREATE TABLE IF NOT EXISTS site_info   id INT AUTO_INCREMENT PRIMARY KEY, siteName VARCHAR(255), url VARCHAR(255), aws_account_info_id INT   ALTER TABLE aws_account_info ADD CONSTRAINT IF NOT EXISTS fk_user_aws FOREIGN KEY (user_id) REFERENCES app_user (id) [42000-214]

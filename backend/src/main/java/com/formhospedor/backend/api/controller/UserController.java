@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -65,7 +66,7 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Page<AppUserDTO> findUsersByParams(@RequestParam PageRequest page, AppUserDTO params) {
+    public Page<AppUserDTO> findUsersByParams(Pageable page, AppUserDTO params) {
         var userParams = mapper.map(params, AppUser.class);
         var result = userService.findUserByParams(page, userParams);
 
@@ -77,9 +78,9 @@ public class UserController {
         return new PageImpl(content, PageRequest.of(page.getPageNumber(), page.getPageSize()), result.getTotalElements());
     }
 
-    @GetMapping("/:id")
+    @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public AppUserDTO findUserById(@RequestParam("id") Integer id) {
+    public AppUserDTO findUserById(@PathVariable("id") Integer id) {
         return userService.findUserById(id)
                 .map(user -> mapper.map(user, AppUserDTO.class))
                 .get();

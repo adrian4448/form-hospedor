@@ -31,9 +31,9 @@ export class MenuComponent implements OnInit {
           url: '/aws'
         },
         {
-          label: 'Perfil',
-          icon: 'pi pi-fw pi-user',
-          url: '/user'
+          label: 'Sair',
+          icon: 'pi pi-power-off',
+          url: '/login'
         }
     ];
 }
