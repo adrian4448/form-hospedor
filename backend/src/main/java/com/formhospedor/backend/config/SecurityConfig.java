@@ -1,7 +1,7 @@
 package com.formhospedor.backend.config;
 
 import com.formhospedor.backend.config.security.jwt.JwtAuthFilter;
-import com.formhospedor.backend.service.impl.UserDetailsServiceImpl;
+import com.formhospedor.backend.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private JwtAuthFilter jwtAuthFilter;

@@ -1,6 +1,6 @@
 package com.formhospedor.backend.config.security.jwt;
 
-import com.formhospedor.backend.service.impl.UserDetailsServiceImpl;
+import com.formhospedor.backend.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +21,7 @@ public class JwtAuthFilter extends OncePerRequestFilter  {
     private JwtService jwtService;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(

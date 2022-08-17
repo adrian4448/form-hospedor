@@ -7,8 +7,8 @@ import com.formhospedor.backend.api.dto.TokenDTO;
 import com.formhospedor.backend.config.security.jwt.JwtService;
 import com.formhospedor.backend.exceptions.BusinessException;
 import com.formhospedor.backend.model.AppUser;
+import com.formhospedor.backend.service.UserDetailsService;
 import com.formhospedor.backend.service.UserService;
-import com.formhospedor.backend.service.impl.UserDetailsServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public class UserController {
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
     private UserService userService;
