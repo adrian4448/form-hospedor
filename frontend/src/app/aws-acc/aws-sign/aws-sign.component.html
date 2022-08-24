@@ -1,24 +1,24 @@
 <div class="container center">
     <div>
-        <form class="aws-form">
+        <form class="aws-form" [formGroup]="awsInfoForm">
             <div>
                 <h3> Informações Conta AWS </h3>
             </div>
 
-            <div class="p-inputgroup">
+            <div class="p-inputgroup" [formGroup]="awsInfoForm">
                 <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
-                <input type="password" pInputText placeholder="Chave de acesso">         
+                <input type="password" pInputText placeholder="Chave de acesso" formControlName="accessKey">         
             </div>
 
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
-                <input type="password" pInputText placeholder="Chave secreta">         
+                <input type="password" pInputText placeholder="Chave secreta" formControlName="secretKey">         
             </div>
 
             <div>
-                <button pButton type="button" label="Registrar" ></button>
+                <button pButton type="button" label="Registrar" (click)="createNewAwsInfo()"></button>
             </div>
         </form>
     </div>
-
+    <p-toast></p-toast>
 </div>

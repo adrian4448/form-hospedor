@@ -6,4 +6,8 @@ import java.util.Optional;
 
 public interface AwsAccountInfoService {
     Optional<AwsAccountInfo> createAwsAccountInformation(AwsAccountInfo awsAccountInfo);
+
+    Optional<AwsAccountInfo> getAwsAccountInfoById(Integer id);
+
+    Optional<AwsAccountInfo> getAwsAccountInfoByUserName(String userName);
 }

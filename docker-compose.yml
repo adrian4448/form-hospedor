@@ -1,0 +1,13 @@
+services:
+  backend:
+    image: form-hospedor-backend
+    container_name: form-hospedor-backend
+    restart: always
+    ports:
+      - 8080:8080
+  frontend:
+    image: form-hospedor-frontend
+    container_name: form-hospedor-frontend
+    restart: always
+    ports:
+      - 4200:4200

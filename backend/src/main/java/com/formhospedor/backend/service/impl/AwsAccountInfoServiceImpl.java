@@ -1,5 +1,6 @@
 package com.formhospedor.backend.service.impl;
 
+import com.formhospedor.backend.exceptions.BusinessException;
 import com.formhospedor.backend.exceptions.NotFoundException;
 import com.formhospedor.backend.model.AwsAccountInfo;
 import com.formhospedor.backend.repository.AwsAccountInfoRepository;
@@ -23,10 +24,23 @@ public class AwsAccountInfoServiceImpl implements AwsAccountInfoService {
     @Override
     @Transactional
     public Optional<AwsAccountInfo> createAwsAccountInformation(AwsAccountInfo awsAccountInfo) {
-        userService.findUserById(awsAccountInfo.getUser().getId())
-                .orElseThrow(() -> new NotFoundException("Não foi encontrado nenhum usuário com este ID"));
+        var user = userService.findUserByUserName(awsAccountInfo.getUser().getUserName())
+                .orElseThrow(() -> new NotFoundException("Não foi encontrado nenhum usuário"));
 
+        awsAccountInfo = getAwsAccountInfoByUserName(user.getUserName()).orElse(awsAccountInfo);
+
+        awsAccountInfo.setUser(user);
         return Optional.of(repository.save(awsAccountInfo));
+    }
+
+    @Override
+    public Optional<AwsAccountInfo> getAwsAccountInfoById(Integer id) {
+        return repository.findById(id);
+    }
+
+    @Override
+    public Optional<AwsAccountInfo> getAwsAccountInfoByUserName(String userName) {
+        return repository.findByUserName(userName);
     }
 
 }

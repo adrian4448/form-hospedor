@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Optional<AppUser> createNewUser(AppUser user) {
-        if (repository.existsByEmail(user.getEmail())) {
+        if (repository.existsByEmailOrUserName(user.getEmail(), user.getUserName())) {
             throw new BusinessException("Usuário com este e-mail já existe.");
         }
 
@@ -56,5 +56,10 @@ public class UserServiceImpl implements UserService {
         Example example = Example.of(params, exampleMatcher);
 
         return repository.findAll(example, page);
+    }
+
+    @Override
+    public Optional<AppUser> findUserByUserName(String userName) {
+        return repository.findByUserName(userName);
     }
 }

@@ -1,26 +1,34 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { CookieService } from "ngx-cookie-service";
 import { Observable } from "rxjs";
 import { AwsAccountInfo } from "src/app/shared/models/AwsAccountInfo";
 import { User } from "src/app/shared/models/User";
+import { UtilsService } from "src/app/shared/services/UtilsService";
 
 @Injectable()
 export class AwsAccountService {
 
-    private url = "http://localhost:8080/api/aws_account_info";
+    private url = "http://localhost:8080/api/aws-account-info";
 
-    constructor(private http: HttpClient) {}
+    constructor(
+        private http: HttpClient,
+        private utilsService: UtilsService
+    ) {}
 
-    findAwsAccountInfoByUser(user: User): Observable<AwsAccountInfo> {
-        return this.http.get<AwsAccountInfo>(`${this.url}/${user.id}`)
+    findAwsAccountInfoByUser(): Observable<AwsAccountInfo> {
+        const userName = this.utilsService.getUserLogged();
+
+        return this.http.get<AwsAccountInfo>(`${this.url}?userName=${userName}`)
             .pipe(res => res);
     }
 
-    createAwsAccountInfo(awsAccountInfo: AwsAccountInfo, userId: number) {
+    createAwsAccountInfo(awsAccountInfo: AwsAccountInfo) {
+        const userName = this.utilsService.getUserLogged();
         const awsAccoutInfoCreate = {
             accessKey: awsAccountInfo.accessKey,
             secretKey: awsAccountInfo.secretKey,
-            user: userId
+            user: { userName }
         };
 
         return this.http.post<AwsAccountInfo>(this.url, awsAccoutInfoCreate)
