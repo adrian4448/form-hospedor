@@ -9,6 +9,7 @@ técnologias utilizadas:
  - Angular (13)
  - AWS SDK (S3)
  - Swagger
+ - Docker e Docker Compose
 
 Basicamente, este projeto permite a hospedagem de landing pages na Amazon Web Services, utilizando o serviço S3 para que isso aconteça.
 
