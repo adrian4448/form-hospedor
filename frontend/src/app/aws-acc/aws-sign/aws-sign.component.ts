@@ -34,6 +34,8 @@ export class AwsSignComponent implements OnInit {
     const { accessKey, secretKey } = this.awsInfoForm.value;
     this.awsAccountInfoService.createAwsAccountInfo({ accessKey, secretKey}).subscribe(() => {
       this.messageService.add({ severity:'success', summary:'Sucesso', detail:'Informações salvas com sucesso' });
+    }, err => {
+      this.messageService.add({ severity:'error', summary:'Erro', detail:'Ocorreu um erro ao salvar as informações' });
     });
   }
 

@@ -32,3 +32,25 @@
     color: rgb(88, 188, 255);
     cursor: pointer;
 }
+
+.form-container {
+    display: flex;
+    align-items: center;
+    background-color: #f6f8fa;
+    border: solid 0.5px hsla(210,18%,87%,1); 
+    width: 90%;
+    height: 45%;
+    border-radius: 10px;
+}
+
+.form-container form {
+    width: 100%;
+    margin: 15px;
+}
+
+.form-title {
+    color: rgb(73, 73, 73);
+    margin: 10px;
+    width: 90%;
+    text-align: center;
+}

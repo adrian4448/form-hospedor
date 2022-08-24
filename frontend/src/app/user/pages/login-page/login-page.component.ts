@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { MessageService } from 'primeng/api';
 import { LoginService } from '../../services/login.service';
 
 @Component({
@@ -14,7 +15,8 @@ export class LoginPageComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) { }
 
   userForm = new FormGroup({
@@ -32,6 +34,8 @@ export class LoginPageComponent implements OnInit {
     this.loginService.authUser({ userName, password }).subscribe(res => {
       this.cookieService.set('userLogged', JSON.stringify(res));
       this.router.navigate(['/form']);
+    }, error => {
+      this.messageService.add({ severity:'error', summary:'Erro', detail:'Usuário ou senha incorretos, tente novamente' });
     });
   }
 
