@@ -20,7 +20,7 @@
     
                 <div class="buttons-container">
                     <button pButton type="button" label="Entrar" (click)="login()" [disabled]="!userForm.valid"></button>
-                    <h5>Cadastre-se</h5>
+                    <button class="button-register" [routerLink]="'/register'">Cadastre-se</button>
                 </div>
             </form>
         </div>

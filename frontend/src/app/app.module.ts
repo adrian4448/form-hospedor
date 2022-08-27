@@ -11,6 +11,7 @@ import { JwtInterceptor } from './shared/interceptors/JwtInterceptor';
 import { MenuModule } from './shared/menu/menu.module';
 import { UserModule } from './user/user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterModule } from './shared/footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     GetFormModule, 
     AwsAccModule,
     UserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FooterModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }],
   bootstrap: [AppComponent]

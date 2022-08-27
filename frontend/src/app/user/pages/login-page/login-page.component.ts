@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { MessageService } from 'primeng/api';
-import { LoginService } from '../../services/login.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,7 +13,7 @@ import { LoginService } from '../../services/login.service';
 export class LoginPageComponent implements OnInit {
 
   constructor(
-    private loginService: LoginService,
+    private userService: UserService,
     private cookieService: CookieService,
     private router: Router,
     private messageService: MessageService
@@ -31,7 +31,7 @@ export class LoginPageComponent implements OnInit {
   login() {
     const { userName, password } = this.userForm.value;
 
-    this.loginService.authUser({ userName, password }).subscribe(res => {
+    this.userService.authUser({ userName, password }).subscribe(res => {
       this.cookieService.set('userLogged', JSON.stringify(res));
       this.router.navigate(['/form']);
     }, error => {

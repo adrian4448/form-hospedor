@@ -10,12 +10,6 @@
     height: 100%;
 }
 
-.center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 .p-inputgroup {
     margin: 10px;
     width: 90%;
@@ -28,7 +22,9 @@
     justify-content: space-between;
 }
 
-.buttons-container h5 {
+.button-register {
+    border: none;
+    background: none;
     color: rgb(88, 188, 255);
     cursor: pointer;
 }

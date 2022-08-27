@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
   template: `
     <app-menu *ngIf="userLogged"></app-menu>
     <router-outlet></router-outlet>
+    <app-footer></app-footer>
   `
 })
 export class AppComponent implements DoCheck {
