@@ -10,4 +10,6 @@ public interface AwsAccountInfoService {
     Optional<AwsAccountInfo> getAwsAccountInfoById(Integer id);
 
     Optional<AwsAccountInfo> getAwsAccountInfoByUserName(String userName);
+
+    Boolean verifyAwsAccountInfoKeysByUser(String userName);
 }

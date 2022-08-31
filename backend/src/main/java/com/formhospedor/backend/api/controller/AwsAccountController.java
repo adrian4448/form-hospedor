@@ -1,6 +1,7 @@
 package com.formhospedor.backend.api.controller;
 
 import com.formhospedor.backend.api.dto.AwsAccountInfoDTO;
+import com.formhospedor.backend.api.dto.AwsAccountInfoOkDTO;
 import com.formhospedor.backend.api.dto.NewAwsAccountDTO;
 import com.formhospedor.backend.exceptions.NotFoundException;
 import com.formhospedor.backend.model.AwsAccountInfo;
@@ -30,6 +31,12 @@ public class AwsAccountController {
         return awsAccountInfoService.createAwsAccountInformation(awsAccountInfo)
                 .map(savedRegister -> modelMapper.map(savedRegister, AwsAccountInfoDTO.class))
                 .get();
+    }
+
+    @PostMapping("/verify")
+    @ResponseStatus(HttpStatus.OK)
+    public AwsAccountInfoOkDTO verifyAwsAccountInfoCredentials(String userName) {
+        return new AwsAccountInfoOkDTO(awsAccountInfoService.verifyAwsAccountInfoKeysByUser(userName));
     }
 
     @GetMapping("/{id}")
