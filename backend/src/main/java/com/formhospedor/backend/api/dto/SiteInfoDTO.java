@@ -1,17 +1,16 @@
 package com.formhospedor.backend.api.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class GetSignedUrlDTO {
+@AllArgsConstructor
+public class SiteInfoDTO {
 
-    String userName;
-    String siteName;
+    private Integer id;
+    private String siteName;
+    private String url;
 
 }

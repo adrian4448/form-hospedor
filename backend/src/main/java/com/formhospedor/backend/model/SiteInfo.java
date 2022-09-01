@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class SiteInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
@@ -26,5 +26,11 @@ public class SiteInfo {
     @ManyToOne
     @JoinColumn(name = "aws_account_info_id")
     private AwsAccountInfo awsAccountInfo;
+
+    public SiteInfo(String siteName, String url, AwsAccountInfo awsAccountInfo) {
+        this.siteName = siteName;
+        this.url = url;
+        this.awsAccountInfo = awsAccountInfo;
+    }
 
 }

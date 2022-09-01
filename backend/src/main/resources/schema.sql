@@ -16,10 +16,10 @@ CREATE TABLE IF NOT EXISTS aws_account_info (
 
 CREATE TABLE IF NOT EXISTS site_info (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    siteName VARCHAR(255),
-    url VARCHAR(255),
+    site_name VARCHAR(255),
+    url VARCHAR(1000),
     aws_account_info_id INT
 );
 
 ALTER TABLE aws_account_info ADD CONSTRAINT IF NOT EXISTS fk_user_aws FOREIGN KEY (user_id) REFERENCES app_user (id);
-ALTER TABLE site_info ADD CONSTRAINT IF NOT EXISTS fk_site_info FOREIGN KEY (aws_account_info_id) REFERENCES aws_account_info (id);
+ALTER TABLE site_info ADD CONSTRAINT IF NOT EXISTS fk_site_info_aws FOREIGN KEY (aws_account_info_id) REFERENCES aws_account_info (id);
