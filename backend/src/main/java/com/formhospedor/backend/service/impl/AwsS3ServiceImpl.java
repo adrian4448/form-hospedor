@@ -58,6 +58,27 @@ public class AwsS3ServiceImpl implements AwsS3Service {
     }
 
     @Override
+    public void deleteSiteBucket(AwsAccountInfo awsAccountInfo, String siteName) {
+        try {
+            var s3Client = S3Client.builder()
+                    .region(Region.US_EAST_1)
+                    .credentialsProvider(getAwsCredentialsProviderByAwsAccountInfo(awsAccountInfo))
+                    .build();
+
+
+            var objectRequest = DeleteObjectRequest.builder()
+                    .bucket(siteName)
+                    .key("index.html")
+                    .build();
+
+            s3Client.deleteObject(objectRequest);
+            s3Client.deleteBucket(DeleteBucketRequest.builder().bucket(siteName).build());
+        } catch(Exception e) {
+            throw new BusinessException("Ocorreu um erro ao deletar a bucket, verifique com o administrador");
+        }
+    }
+
+    @Override
     public Boolean awsAccountInfoCredentialsIsValid(AwsAccountInfo awsAccountInfo) {
         try {
             S3Client.builder()

@@ -39,4 +39,17 @@ public class UploaderFacade {
         return url;
     }
 
+    @Transactional
+    public void deleteSite(UploadDTO dto) {
+        var awsAccountInfo = awsAccountInfoService.getAwsAccountInfoByUserName(dto.getUserName())
+                .orElseThrow(() -> new NotFoundException("Credenciais da AWS deste usuário não encontradas"));
+
+        if (!siteInfoService.siteExists(dto.getSiteName())) {
+            throw new BusinessException("Não existe nenhum site com este nome");
+        }
+
+        awsS3Service.deleteSiteBucket(awsAccountInfo, dto.getSiteName());
+        siteInfoService.deleteSiteInfo(dto.getSiteName());
+    }
+
 }

@@ -9,10 +9,7 @@ import java.util.Optional;
 public interface UserService {
 
     Optional<AppUser> findUserById(Integer id);
-
     Optional<AppUser> createNewUser(AppUser user);
-
     Page<AppUser> findUserByParams(Pageable page, AppUser params);
-
     Optional<AppUser> findUserByUserName(String userName);
 }

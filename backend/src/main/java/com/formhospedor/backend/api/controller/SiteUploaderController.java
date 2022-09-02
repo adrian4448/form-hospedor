@@ -17,8 +17,14 @@ public class SiteUploaderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public SignedUrlDTO uploadDocument(UploadDTO dto, MultipartFile file) {
+    public SignedUrlDTO uploadSite(UploadDTO dto, MultipartFile file) {
         return new SignedUrlDTO(uploaderFacade.uploadSite(dto, file));
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteSite(@RequestBody UploadDTO dto) {
+        uploaderFacade.deleteSite(dto);
     }
 
 }
