@@ -9,6 +9,8 @@ import com.formhospedor.backend.exceptions.BusinessException;
 import com.formhospedor.backend.model.AppUser;
 import com.formhospedor.backend.service.UserDetailsService;
 import com.formhospedor.backend.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,12 +21,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/user")
+@Api("Users API")
 public class UserController {
 
     @Autowired
@@ -41,6 +45,7 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Cria um usuário no sistema")
     private NewAppUserDTO createNewUser(@RequestBody NewAppUserDTO dto) {
         var user = mapper.map(dto, AppUser.class);
 
@@ -51,6 +56,7 @@ public class UserController {
 
     @PostMapping("/auth")
     @ResponseStatus(HttpStatus.OK)
+    @ApiOperation("Realiza a autenticação de um usuário")
     private TokenDTO getToken(@RequestBody AuthenticationDTO dto) {
         try {
             var user = mapper.map(dto, AppUser.class);
@@ -66,6 +72,7 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
+    @ApiIgnore
     public Page<AppUserDTO> findUsersByParams(Pageable page, AppUserDTO params) {
         var userParams = mapper.map(params, AppUser.class);
         var result = userService.findUserByParams(page, userParams);
@@ -80,6 +87,7 @@ public class UserController {
 
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
+    @ApiIgnore
     public AppUserDTO findUserById(@PathVariable("id") Integer id) {
         return userService.findUserById(id)
                 .map(user -> mapper.map(user, AppUserDTO.class))

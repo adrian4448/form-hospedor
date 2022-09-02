@@ -1,4 +1,4 @@
-package com.formhospedor.backend.api.controller;
+package com.formhospedor.backend.api;
 
 import com.formhospedor.backend.api.dto.ApiErrorDTO;
 import com.formhospedor.backend.exceptions.BusinessException;
