@@ -24,3 +24,7 @@ li {
     margin: 15px;
     cursor: pointer;
 }
+
+a { 
+    color: black;
+}
