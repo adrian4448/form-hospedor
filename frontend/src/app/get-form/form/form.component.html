@@ -5,7 +5,7 @@
         <form>
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-                <input type="text" pInputText placeholder="Nome da página">         
+                <input type="text" pInputText placeholder="Nome da página" name="siteName" [(ngModel)]="siteName">    
             </div>
 
             <div class="buttons-container">
@@ -15,8 +15,7 @@
     </p-card>
 
     <p-card class="card-container uploader-container" *ngIf="activeItem === 1">
-        <!-- (uploadHandler)="myUploader($event)" -->
-        <p-fileUpload name="myfile[]" [multiple]="false" (onUpload)="nextStep()" (onError)="nextStep()"></p-fileUpload>
+        <p-fileUpload name="myfile[]" [multiple]="false" [customUpload]="true" accept=".html" (uploadHandler)="uploadSite($event)"></p-fileUpload>
 
         <div class="buttons-container">
             <button pButton type="button" label="Voltar" (click)="previousStep()"></button>
@@ -24,6 +23,19 @@
     </p-card>
 
     <p-card class="card-container uploader-container" *ngIf="activeItem === 2">
-        <h1>Parabéns, foi realizado o upload</h1>
+        <div>
+            <h1>Parabéns, foi realizado o upload</h1>
+        </div>
+
+        <div>
+            <p> Para entrar no site, acesse a URL: <a class="site-url" [href]="siteUrl">{{ siteUrl }}</a></p>
+        </div>
+        
+        <div class="buttons-container">
+            <button pButton type="button" label="Criar Novo" (click)="firstStep()"></button>
+            <button pButton type="button" label="Visualizar sites"></button>
+        </div>
     </p-card>
+
+    <p-toast></p-toast>
 </div>

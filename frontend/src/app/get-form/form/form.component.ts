@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
+import { UploaderService } from '../services/uploader.service';
 
 @Component({
   selector: 'app-form',
@@ -8,11 +9,16 @@ import { MenuItem } from 'primeng/api';
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private uploaderService: UploaderService,
+    private messageService: MessageService
+  ) { }
 
   public items: MenuItem[] = [];
-
   public activeItem = 0;
+  
+  public siteName: string = '';
+  public siteUrl: string = '';
 
   ngOnInit() {
     this.items = [
@@ -28,5 +34,25 @@ export class FormComponent implements OnInit {
 
   previousStep() {
     this.activeItem--;
+  }
+
+  firstStep() {
+    this.activeItem = 0;
+    this.siteName = '';
+    this.siteUrl = '';
+  }
+
+  uploadSite(event: any) {
+    const formData: FormData = new FormData();
+    const siteFile = event.files[0]; 
+    formData.append('file', siteFile);
+
+    this.uploaderService.uploadFile(this.siteName, formData).subscribe(res => {
+      this.siteUrl = res.urlSigned;
+      this.nextStep();
+    }, err => {
+      this.messageService.add({ severity:'error', summary:'Erro', detail:`Ocorreu um problema ao fazer o upload do site erro: ${err.error.errors[0]}` });
+    });
+
   }
 }

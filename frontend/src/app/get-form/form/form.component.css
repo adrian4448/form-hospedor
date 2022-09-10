@@ -19,3 +19,13 @@
 .buttons-container button {
     margin-right: 10px;
 }
+
+.site-url {
+    color: #3B82F6;
+    font-weight: 700;
+}
+
+.site-url:hover {
+    transition: 0.5s;
+    color: #0547b1;
+}

@@ -8,6 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { StepsModule } from 'primeng/steps';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { FormsModule } from '@angular/forms';
+import { UploaderService } from './services/uploader.service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,10 @@ import { ButtonModule } from 'primeng/button';
     StepsModule,
     HttpClientModule,
     CardModule,
-    ButtonModule
-  ]
+    ButtonModule,
+    FormsModule,
+    ToastModule
+  ],
+  providers: [UploaderService, MessageService]
 })
 export class GetFormModule { }
