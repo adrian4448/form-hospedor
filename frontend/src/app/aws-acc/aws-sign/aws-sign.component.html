@@ -15,8 +15,9 @@
                 <input type="password" pInputText placeholder="Chave secreta" formControlName="secretKey">         
             </div>
 
-            <div>
+            <div class="buttons-container">
                 <button pButton type="button" label="Registrar" (click)="createNewAwsInfo()"></button>
+                <button pButton type="button" label="Validar" class="p-button-secondary" (click)="validateAwsAccountInfo()"></button>
             </div>
         </form>
     </div>

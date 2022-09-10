@@ -84,7 +84,8 @@ public class AwsS3ServiceImpl implements AwsS3Service {
             S3Client.builder()
                     .region(Region.US_EAST_1)
                     .credentialsProvider(getAwsCredentialsProviderByAwsAccountInfo(awsAccountInfo))
-                    .build();
+                    .build()
+                    .listBuckets();
 
             return true;
         } catch (Exception e) {

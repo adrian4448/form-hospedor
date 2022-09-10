@@ -30,10 +30,14 @@ public class AwsAccountInfoServiceImpl implements AwsAccountInfoService {
         var user = userService.findUserByUserName(awsAccountInfo.getUser().getUserName())
                 .orElseThrow(() -> new NotFoundException("Não foi encontrado nenhum usuário"));
 
-        awsAccountInfo = getAwsAccountInfoByUserName(user.getUserName()).orElse(awsAccountInfo);
+        var awsAccountInfoToSave = getAwsAccountInfoByUserName(user.getUserName())
+                .map(awsAccount -> {
+                    awsAccountInfo.setId(awsAccount.getId());
+                    return awsAccountInfo;
+                }).orElse(awsAccountInfo);
 
-        awsAccountInfo.setUser(user);
-        return Optional.of(repository.save(awsAccountInfo));
+        awsAccountInfoToSave.setUser(user);
+        return Optional.of(repository.save(awsAccountInfoToSave));
     }
 
     @Override

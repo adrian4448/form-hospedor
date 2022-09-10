@@ -35,4 +35,11 @@ export class AwsAccountService {
             .pipe(res => res);
     }
 
+    validateAwsAccountInfo() {
+        const userName = this.utilsService.getUserLogged();
+
+        return this.http.post<any>(`${this.url}/verify?userName=${userName}`, {})
+            .pipe(res => res);
+    }
+
 }

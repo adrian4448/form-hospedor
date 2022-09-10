@@ -39,4 +39,16 @@ export class AwsSignComponent implements OnInit {
     });
   }
 
+  validateAwsAccountInfo() {
+    this.awsAccountInfoService.validateAwsAccountInfo().subscribe(resp => {
+      if (resp.credentialsOk) {
+        this.messageService.add({ severity:'success', summary:'Sucesso', detail:'Foi possivel autenticar com sucesso !' });
+      } else {
+        this.messageService.add({ severity:'error', summary:'Erro', detail:'Ocorreu um erro ao aunteticar, valide as informações' });
+      }
+    }, err => {
+      this.messageService.add({ severity:'error', summary:'Erro', detail:'Ocorreu um erro ao aunteticar, valide as informações' });
+    });
+  }
+
 }
