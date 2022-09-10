@@ -12,7 +12,10 @@ import { FormsModule } from '@angular/forms';
 import { UploaderService } from './services/uploader.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
 import { SitesPageComponent } from './pages/sites-page/sites-page.component';
+import { SitesService } from './services/sites.service';
 
 @NgModule({
   declarations: [
@@ -29,8 +32,10 @@ import { SitesPageComponent } from './pages/sites-page/sites-page.component';
     CardModule,
     ButtonModule,
     FormsModule,
-    ToastModule
+    ToastModule,
+    TableModule,
+    PaginatorModule
   ],
-  providers: [UploaderService, MessageService]
+  providers: [ UploaderService, MessageService, SitesService ]
 })
 export class GetFormModule { }

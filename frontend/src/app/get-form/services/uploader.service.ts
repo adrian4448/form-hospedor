@@ -20,4 +20,11 @@ export class UploaderService {
             .pipe(res => res);;
     }
 
+    public deleteFile(siteName: string) {
+        const userName = this.utilsService.getUserLogged();
+
+        return this.http.delete(this.url, { body: { siteName, userName } })
+            .pipe(res => res);;
+    }
+
 }

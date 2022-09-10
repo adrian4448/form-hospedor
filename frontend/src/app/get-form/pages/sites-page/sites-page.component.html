@@ -1,1 +1,27 @@
-<p>sites works!</p>
+<div class="container">
+    <div class="center container" *ngIf="totalRecords === 0">
+        <h4 class="empty-message"> Voce não possui nenhum site cadastrado, para cadastrar um clique no botão abaixo</h4>
+        <button pButton type="button" label="Criar Novo Site" [routerLink]="'/form'"></button>
+    </div>
+    <p-table #site [value]="sites" *ngIf="totalRecords !== 0">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Código</th>
+                <th>Nome do Site</th>
+                <th>URL</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-site>
+            <tr>
+                <td>{{site.id}}</td>
+                <td>{{site.siteName}}</td>
+                <td>{{site.url}}</td>
+                <td><i class="pi pi-trash red" (click)="deleteSite(site.siteName)"></i></td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <p-paginator [rows]="10" [totalRecords]="totalRecords" (onPageChange)="renderListSites($event)"></p-paginator>
+        </ng-template>
+    </p-table>
+</div>
