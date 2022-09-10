@@ -24,6 +24,7 @@ export class MenuComponent implements OnInit {
         { 
           label: 'Sites hospedados',
           icon: 'pi pi-server',
+          url: '/sites'
         },
         {
           label: 'Informações AWS',

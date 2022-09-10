@@ -12,11 +12,13 @@ import { FormsModule } from '@angular/forms';
 import { UploaderService } from './services/uploader.service';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { SitesPageComponent } from './pages/sites-page/sites-page.component';
 
 @NgModule({
   declarations: [
     FormComponent,
-    FormPageComponent
+    FormPageComponent,
+    SitesPageComponent
   ],
   imports: [
     CommonModule,

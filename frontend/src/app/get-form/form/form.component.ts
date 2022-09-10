@@ -53,6 +53,5 @@ export class FormComponent implements OnInit {
     }, err => {
       this.messageService.add({ severity:'error', summary:'Erro', detail:`Ocorreu um problema ao fazer o upload do site erro: ${err.error.errors[0]}` });
     });
-
   }
 }
